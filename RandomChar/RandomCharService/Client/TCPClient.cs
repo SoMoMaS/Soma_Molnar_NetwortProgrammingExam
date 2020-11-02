@@ -1,10 +1,27 @@
-﻿using System;
+﻿using RandomCharServiceInterfaces;
+using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Client
 {
-    class TCPClient
+    class TCPClient : IWorker
     {
+        public int Port { get; set; }
+        public void Connect()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task SendAsync()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

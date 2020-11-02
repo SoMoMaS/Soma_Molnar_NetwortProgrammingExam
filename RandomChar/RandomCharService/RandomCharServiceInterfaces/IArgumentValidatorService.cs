@@ -4,7 +4,8 @@ using System.Text;
 
 namespace RandomCharServiceInterfaces
 {
-    class IArgumentValidatorService
+    public interface IArgumentValidatorService
     {
+        IWorker Validation(string connectionType, string port);
     }
 }

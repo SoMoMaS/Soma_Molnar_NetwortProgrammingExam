@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RandomCharServiceInterfaces
 {
-    interface IWorker
+    public interface IWorker
     {
         void Connect();
 
