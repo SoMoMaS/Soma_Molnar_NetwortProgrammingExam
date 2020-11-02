@@ -1,18 +1,35 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using RandomCharServiceInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
+﻿//----------------------------------------------------------------------
+// <copyright company="FHWN.ac.at">
+// Copyright (c) FHWN. All rights reserved.
+// </copyright>
+// <summary></summary>
+// <author>Soma Molnar</author>
+// -----------------------------------------------------------------------
 
 namespace Client
 {
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.DependencyInjection;
+    using Microsoft.Extensions.Hosting;
+    using Microsoft.Extensions.Logging;
+    using RandomCharServiceInterfaces;
+    using System.Threading.Tasks;
+
+    /// <summary>
+    /// Defines the <see cref="ConfigurationSetter" />.
+    /// </summary>
     public class ConfigurationSetter
     {
+        /// <summary>
+        /// Defines the myHost.
+        /// </summary>
         private IHost myHost;
+
+        /// <summary>
+        /// The ConfigureHost.
+        /// </summary>
+        /// <param name="arguments">The arguments<see cref="string[]"/>.</param>
+        /// <returns>The <see cref="Task"/>.</returns>
         public async Task ConfigureHost(string[] arguments)
         {
             this.myHost = new HostBuilder()
@@ -36,8 +53,6 @@ namespace Client
             var runner = this.myHost.Services.GetRequiredService<Runner>();
 
             await runner.StartAppAsync();
-
-
         }
     }
 }

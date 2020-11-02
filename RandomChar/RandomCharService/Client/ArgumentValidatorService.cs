@@ -1,12 +1,27 @@
-﻿using RandomCharServiceInterfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿//----------------------------------------------------------------------
+// <copyright company="FHWN.ac.at">
+// Copyright (c) FHWN. All rights reserved.
+// </copyright>
+// <summary></summary>
+// <author>Soma Molnar</author>
+// -----------------------------------------------------------------------
 
 namespace Client
 {
+    using RandomCharServiceInterfaces;
+    using System;
+
+    /// <summary>
+    /// Defines the <see cref="ArgumentValidatorService" />.
+    /// </summary>
     class ArgumentValidatorService : IArgumentValidatorService
     {
+        /// <summary>
+        /// The Validation.
+        /// </summary>
+        /// <param name="connectionType">The connectionType<see cref="string"/>.</param>
+        /// <param name="port">The port<see cref="string"/>.</param>
+        /// <returns>The <see cref="IWorker"/>.</returns>
         public IWorker Validation(string connectionType, string port)
         {
             int Port;
@@ -29,7 +44,7 @@ namespace Client
             }
             else if (connectionType == "Tcp")
             {
-                var tcpClient= new TCPClient();
+                var tcpClient = new TCPClient();
 
                 if (isValidPort)
                 {
