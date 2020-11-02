@@ -66,3 +66,51 @@ Bei der Konfiguration des Hosts füge diese auch zur Services.
                     confServ.AddTransient<Runner>();
                 })
 ```
+
+## Runner
+Die Runner Klasse ist meine sogenannte Einstiegsklasse wo ich die passende Client/ Server hole und rufe die GetAsync Methode 
+```cs
+  public async Task StartAppAsync()
+        {
+            IWorker server = argsValidator.Validation(config["Servertype"], config["Port"]);
+            server.Connect();
+
+            myLogger.LogTrace("Connected ");
+            await server.GetAsync();
+        }
+```	
+
+## Server GetAsync
+In der GetAsync Methode Serverseitig starte ich meine Listener auf die gegebenen port und accepte ich die einkommende Verbindungen. Danach kann ich die Networkstream von der TcpClient holen.
+
+```cs
+  while (isConnected)
+            {
+                if (stream.DataAvailable)
+                {
+                    byte[] receivedData = new byte[1024];
+                    this.stream.Read(receivedData, 0, receivedData.Length);
+                    string message = Encoding.UTF8.GetString(receivedData);
+                    // TODO generate random chars
+                    await SendAsync(Encoding.UTF8.GetBytes("You requested a random line of chars"));
+                }
+            }
+```	
+
+## Client GetAsync
+Bei der Client erstelle ich eine TcpClient und verbinde ich mich auf die Localhost(127.0.0.1) auf den gegebenen Port. Nachdem kann der Kommunikation gestartet werden.
+```cs
+  while (this.isConnected)
+{
+    if (this.stream.DataAvailable)
+    {
+        byte[] reveivedData = new byte[1024];
+        this.stream.Read(reveivedData, 0, reveivedData.Length);
+        Console.WriteLine(Encoding.UTF8.GetString(reveivedData));
+    }
+    Console.WriteLine("Type 'GetRand' to get a random line of chars.");
+    string message = Console.ReadLine();
+    byte[] messageToSend = Encoding.UTF8.GetBytes(message);
+    await SendAsync(messageToSend);
+}
+```	
