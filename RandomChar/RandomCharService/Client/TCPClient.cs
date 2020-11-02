@@ -1,6 +1,7 @@
 ﻿using RandomCharServiceInterfaces;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using System.Text;
@@ -11,6 +12,7 @@ namespace Client
     class TCPClient : IWorker
     {
         public int Port { get; set; }
+        private bool isConnected;
         private TcpClient client;
         private NetworkStream stream;
         public void Connect()
@@ -18,16 +20,28 @@ namespace Client
             this.client = new TcpClient();
             this.client.Connect(new IPEndPoint(IPAddress.Parse("127.0.0.1"), Port));
             this.stream = this.client.GetStream();
+            this.isConnected = true;
         }
 
-        public Task GetAsync()
+        public async Task GetAsync()
         {
-            throw new NotImplementedException();
+            while (this.isConnected)
+            {
+                if (this.stream.DataAvailable)
+                {
+                    byte[] reveivedData = new byte[1024];
+                    await this.stream.ReadAsync(reveivedData, 0, reveivedData.Length);
+                }
+                Console.WriteLine("Type 'GetRand' to get a random line of chars.");
+                string message = Console.ReadLine();
+                byte[] messageToSend = Encoding.UTF8.GetBytes(message);
+                await SendAsync(messageToSend);
+            }
         }
 
-        public Task SendAsync(byte[] data)
+        public async Task SendAsync(byte[] data)
         {
-            throw new NotImplementedException();
+            await this.stream.WriteAsync(data, 0, data.Length);
         }
     }
 }
