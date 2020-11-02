@@ -37,12 +37,15 @@ namespace Server
                     byte[] receivedData = new byte[1024];
                     this.stream.Read(receivedData, 0, receivedData.Length);
                     string message = Encoding.UTF8.GetString(receivedData);
-                    if (message == "GetRand")
+                    // TODO generate random chars
+                    /*if (message == "GetRand")
                     {
-                        // TODO generate random chars
+                        
 
                         await SendAsync(Encoding.UTF8.GetBytes("You requested a random line of chars"));
-                    }
+                    }*/
+
+                    await SendAsync(Encoding.UTF8.GetBytes("You requested a random line of chars"));
                 }
             }
         }

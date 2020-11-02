@@ -30,7 +30,8 @@ namespace Client
                 if (this.stream.DataAvailable)
                 {
                     byte[] reveivedData = new byte[1024];
-                    await this.stream.ReadAsync(reveivedData, 0, reveivedData.Length);
+                    this.stream.Read(reveivedData, 0, reveivedData.Length);
+                    Console.WriteLine(Encoding.UTF8.GetString(reveivedData));
                 }
                 Console.WriteLine("Type 'GetRand' to get a random line of chars.");
                 string message = Console.ReadLine();

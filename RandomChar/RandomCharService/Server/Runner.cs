@@ -30,7 +30,7 @@ namespace Server
             IWorker server = argsValidator.Validation(config["Servertype"], config["Port"]);
             server.Connect();
 
-            myLogger.LogDebug("Connected ");
+            myLogger.LogTrace("Connected ");
             await server.GetAsync();
 
         }
