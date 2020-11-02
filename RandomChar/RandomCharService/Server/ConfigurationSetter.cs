@@ -20,6 +20,7 @@ namespace Server
                 .ConfigureServices(confServ =>
                 {
                     confServ.AddTransient<IArgumentValidatorService, ArgumentValidatorService>();
+                    confServ.AddTransient<Runner>();
                 })
                 .ConfigureAppConfiguration(appConf =>
                 {
@@ -30,6 +31,12 @@ namespace Server
                    loggConf.AddDebug();
                    loggConf.AddConsole();
                }).Build();
+
+            this.myHost.Start();
+
+            var runner = this.myHost.Services.GetRequiredService<Runner>();
+
+            await runner.StartAppAsync();
 
 
         }
