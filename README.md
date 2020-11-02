@@ -1,4 +1,4 @@
-Author: Soma Molnar
+
 #Introduction
 Diese Repository habe ich neu erstellt nachdem ich alle meine Veränderungen an dem Code irgendwie verloren habe. Ich bitte Sie um Verständis.
 Ich habe den Code nur solange nachgebaut was ich bis 13:10 hatte.
