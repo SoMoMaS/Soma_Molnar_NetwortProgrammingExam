@@ -19,7 +19,7 @@ namespace Client
             throw new NotImplementedException();
         }
 
-        public Task SendAsync()
+        public Task SendAsync(byte[] data)
         {
             throw new NotImplementedException();
         }

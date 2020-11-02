@@ -28,14 +28,28 @@ namespace Server
 
         }
 
-        public Task GetAsync()
+        public async Task GetAsync()
         {
-            throw new NotImplementedException();
+            while (isConnected)
+            {
+                if (stream.DataAvailable)
+                {
+                    byte[] receivedData = new byte[1024];
+                    this.stream.Read(receivedData, 0, receivedData.Length);
+                    string message = Encoding.UTF8.GetString(receivedData);
+                    if (message == "GetRand")
+                    {
+                        // TODO generate random chars
+
+                        await SendAsync(Encoding.UTF8.GetBytes("You requested a random line of chars"));
+                    }
+                }
+            }
         }
 
-        public Task SendAsync()
+        public async Task SendAsync(byte[] data)
         {
-            throw new NotImplementedException();
+            await this.stream.WriteAsync(data);
         }
     }
 }

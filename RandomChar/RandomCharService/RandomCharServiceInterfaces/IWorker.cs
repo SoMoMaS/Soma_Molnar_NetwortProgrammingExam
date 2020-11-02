@@ -9,7 +9,7 @@ namespace RandomCharServiceInterfaces
     {
         void Connect();
 
-        Task SendAsync();
+        Task SendAsync(byte[] data);
 
         Task GetAsync();
     }
